@@ -15,17 +15,29 @@ import org.json.JSONException;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class DetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_POSITION = "extra_position";
     private static final int DEFAULT_POSITION = -1;
+    @BindView(R.id.image_iv)
+    ImageView ingredientsIv;
+    @BindView(R.id.ingredients_tv)
+    TextView ingredientsTv;
+    @BindView(R.id.also_known_tv)
+    TextView alsoKnownAsTv;
+    @BindView(R.id.origin_tv)
+    TextView placeOfOrigin;
+    @BindView(R.id.description_tv)
+    TextView descriptionTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-
-        ImageView ingredientsIv = findViewById(R.id.image_iv);
+        ButterKnife.bind(this);
 
         Intent intent = getIntent();
         if (intent == null) {
@@ -67,10 +79,6 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void populateUI(Sandwich sandwich) {
-        TextView ingredientsTv = findViewById(R.id.ingredients_tv);
-        TextView alsoKnownAsTv = findViewById(R.id.also_known_tv);
-        TextView placeOfOrigin = findViewById(R.id.origin_tv);
-        TextView descriptionTv = findViewById(R.id.description_tv);
         List<String> ingredients = sandwich.getIngredients();
         List<String> alsoKnownAsList = sandwich.getAlsoKnownAs();
 
